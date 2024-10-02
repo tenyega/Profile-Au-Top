@@ -80,10 +80,16 @@ LOADED THE FIXTURES
 
 
 CREATING LOGIN FORM AND REGISTRATION FORM
-	symfony console make:security:form-login
+	symfony console make:security:form-login 
+		SecurityController with /logout and no phpUnit test
 	symfony console make:registration-form
+		 composer require symfonycasts/verify-email-bundle 
 
+	 symfony console make:entity User
+		added is_verified
 
+INSTALLED UX ICON FROM SYMFONY 
+composer require symfony/asset-mapper symfony/stimulus-bundle
 
 ADMIN
 	composer req easycorp/easyadmin-bundle
