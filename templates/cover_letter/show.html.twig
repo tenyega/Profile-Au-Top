@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Cover Letter
+{% endblock %}
+{% block body %}
+	<div
+		class="container mx-auto p-6">
+		<!-- Card Container -->
+		<div
+			class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
+			<!-- Content Section -->
+			<div class="mb-6">
+				<h2 class="text-lg font-semibold text-gray-900">Content:</h2>
+				<p class="text-gray-700 mt-2">
+					{{coverLetter.content}}
+				</p>
+			</div>
+
+			<!-- Timestamps -->
+			<div
+				class="mb-6 grid grid-cols-2 gap-4">
+				<!-- Created At -->
+				<div>
+					<h3 class="text-sm font-semibold text-gray-900">Created At:</h3>
+					<p class="text-gray-600">{{ coverLetter.createdAt|date('Y-m-d') }}</p>
+				</div>
+
+				<!-- Updated At -->
+				<div>
+					<h3 class="text-sm font-semibold text-gray-900">Updated At:</h3>
+					<p class="text-gray-600">{{ coverLetter.updatedAt|date('Y-m-d') }}</p>
+				</div>
+			</div>
+
+			<!-- Job Offer -->
+			<div class="mb-6">
+				<h3 class="text-sm font-semibold text-gray-900">Related Job Offer:</h3>
+				<p class="text-indigo-500">
+					<a href="{{path('app_job_offer_show', {'id':coverLetter.jobOffer.id})}}" class="hover:underline">View Job Offer</a>
+				</p>
+			</div>
+
+			<!-- App User -->
+			<div class="mb-6">
+				<h3 class="text-sm font-semibold text-gray-900">App User:</h3>
+				<p class="text-gray-500">{{coverLetter.appuser}}</p>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
