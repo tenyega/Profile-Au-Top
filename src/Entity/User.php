@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -68,6 +70,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: CoverLetter::class, mappedBy: 'app_user', orphanRemoval: true)]
     private Collection $coverLetters;
 
+    #[ORM\Column]
+    private bool $isVerified = false;
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
@@ -89,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->linkedInMessages = new ArrayCollection();
         $this->coverLetters = new ArrayCollection();
         $this->image = 'default.jpg';
+        $this-> isVerified = false;
     }
 
     public function getId(): ?int
@@ -312,6 +317,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $coverLetter->setAppUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

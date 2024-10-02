@@ -59,15 +59,6 @@ CONTROLLER
 	symfony console make:controller JobOffer
 	symfony console make:controller LinkedInMessage
 	symfony console make:controller CoverLetter
-	
-
-	symfony console make:registration-form
-	symfony console make:security:form-login
-	
-	ADMIN
-	composer req easycorp/easyadmin-bundle
-	symfony console make:admin:dashboard	
-	symfony console make:admin:crud 
 
 
 
@@ -87,6 +78,17 @@ CREATION BDD
 LOADED THE FIXTURES 
 	symfony console d:f:l
 
+
+CREATING LOGIN FORM AND REGISTRATION FORM
+	symfony console make:security:form-login
+	symfony console make:registration-form
+
+
+
+ADMIN
+	composer req easycorp/easyadmin-bundle
+	symfony console make:admin:dashboard	
+	symfony console make:admin:crud 
 
 
 PAGINATION (knp paginator bundle) 
