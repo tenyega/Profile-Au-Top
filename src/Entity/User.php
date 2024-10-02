@@ -88,6 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->jobOffers = new ArrayCollection();
         $this->linkedInMessages = new ArrayCollection();
         $this->coverLetters = new ArrayCollection();
+        $this->image = 'default.jpg';
     }
 
     public function getId(): ?int
