@@ -4,6 +4,58 @@
 {% endblock %}
 
 {% block body %}
-	{{ dump(jobOffers) }}
+	{% for jobOffer in jobOffers %}
+		<a href="{{path('app_job_offer_show', {'id':jobOffer.id})}}">
+			<div class="container mx-auto py-8">
+				<div
+					class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+					<!-- Job Offer Card -->
+					<div class="p-6">
+						<h1 class="text-2xl font-bold text-gray-900">{{ jobOffer.title }}</h1>
+						<p class="text-sm text-gray-600">Posted by
+							{{ jobOffer.company }}</p>
+
+						<div class="mt-4">
+							<p class="text-gray-700">
+								<span class="font-semibold">Location:</span>
+								{{ jobOffer.location }}</p>
+							<p class="text-gray-700">
+								<span class="font-semibold">Salary:</span>
+								{{ jobOffer.salary }}</p>
+							<p class="text-gray-700">
+								<span class="font-semibold">Contact Person:</span>
+								{{ jobOffer.contactPerson }}</p>
+							<p class="text-gray-700">
+								<span class="font-semibold">Contact Email:</span>
+								<a href="mailto:{{ jobOffer.contactEmail }}" class="text-blue-500 underline">{{ jobOffer.contactEmail }}</a>
+							</p>
+							<p class="text-gray-700">
+								<span class="font-semibold">Application Deadline:</span>
+								{{ jobOffer.applicationDate|date('Y-m-d') }}</p>
+
+							{% if jobOffer.status.label == "En attente" %}
+								<p class="text-gray-700">
+									<span class="font-semibold">Status:</span>
+									On Hold
+								</p>
+
+							{% else %}
+								<p class="text-gray-700">
+									<span class="font-semibold">Status:</span>
+									{{ jobOffer.status.label }}</p>
+								<div class="mt-6">
+									<a href="{{ jobOffer.link }}" target="_blank" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
+								</div>
+							{% endif %}
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</a>
+	{% endfor %}
+
 
 {% endblock %}
