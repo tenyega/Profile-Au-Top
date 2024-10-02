@@ -55,7 +55,19 @@ ENTITY
 
 
 CONTROLLER
+	symfony console make:controller Home
+	symfony console make:controller JobOffer
+	symfony console make:controller LinkedInMessage
+	symfony console make:controller CoverLetter
 	
+
+	symfony console make:registration-form
+	symfony console make:security:form-login
+	
+	ADMIN
+	composer req easycorp/easyadmin-bundle
+	symfony console make:admin:dashboard	
+	symfony console make:admin:crud 
 
 
 
