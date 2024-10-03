@@ -4,6 +4,107 @@
 {% endblock %}
 
 {% block body %}
-	WELCOME TO KANBAN DASHBOARD
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Kanban Board with Drag and Drop</title>
+			<script src="https://cdn.tailwindcss.com"></script>
+			<style>
+				.dragging {
+					opacity: 0.5;
+				}
+			</style>
+		</head>
+		<body class="bg-gray-100">
+			<div class="flex flex-col items-center min-h-screen p-8">
+				<h1 class="mb-8 text-3xl font-bold text-gray-800">Job Application Status
+				</h1>
+
+				<!-- Kanban Board -->
+				<div
+					class="flex flex-grow w-full space-x-4 max-w-7xl">
+					<!-- Apply Column -->
+					<div class="flex flex-col w-1/5 p-4 bg-white rounded-lg shadow-lg" data-status="apply" ondragover="allowDrop(event)" ondrop="drop(event)">
+						<h2 class="mb-4 text-lg font-semibold text-gray-700 border-b-2">Apply</h2>
+						<div id="apply" class="flex-1 space-y-4">
+							{% for jobOfferAPostuler in jobOfferAPostulers %}
+								<div class="p-4 bg-blue-100 rounded-lg shadow" draggable="true" ondragstart="drag(event)" id="job1">{{jobOfferAPostuler.title}}</div>
+
+							{% endfor %}
+						</div>
+					</div>
+
+					<!-- On Hold Column -->
+					<div class="flex flex-col w-1/5 p-4 bg-white rounded-lg shadow-lg" data-status="on-hold" ondragover="allowDrop(event)" ondrop="drop(event)">
+						<h2 class="mb-4 text-lg font-semibold text-gray-700 border-b-2">On Hold</h2>
+						<div id="on-hold" class="flex-1 space-y-4">
+							{% for jobOfferEnAttente in jobOfferEnAttentes %}
+								<div class="p-4 bg-yellow-100 rounded-lg shadow" draggable="true" ondragstart="drag(event)" id="job1">{{jobOfferEnAttente.title}}</div>
+
+							{% endfor %}
+						</div>
+					</div>
+
+					<!-- Interview Column -->
+					<div class="flex flex-col w-1/5 p-4 bg-white rounded-lg shadow-lg" data-status="interview" ondragover="allowDrop(event)" ondrop="drop(event)">
+						<h2 class="mb-4 text-lg font-semibold text-gray-700 border-b-2">Interview</h2>
+						<div id="interview" class="flex-1 space-y-4">
+							{% for jobOfferEntretien in jobOfferEntretiens %}
+								<div class="p-4 bg-orange-100 rounded-lg shadow" draggable="true" ondragstart="drag(event)" id="job1">{{jobOfferEntretien.title}}</div>
+
+							{% endfor %}
+						</div>
+					</div>
+
+					<!-- Accepted Column -->
+					<div class="flex flex-col w-1/5 p-4 bg-white rounded-lg shadow-lg" data-status="accepted" ondragover="allowDrop(event)" ondrop="drop(event)">
+						<h2 class="mb-4 text-lg font-semibold text-gray-700 border-b-2">Accepted</h2>
+						<div id="accepted" class="flex-1 space-y-4">
+							{% for jobOfferAccepte in jobOfferAcceptes %}
+								<div class="p-4 bg-green-100 rounded-lg shadow" draggable="true" ondragstart="drag(event)" id="job1">{{jobOfferAccepte.title}}</div>
+
+							{% endfor %}
+						</div>
+					</div>
+
+					<!-- Rejected Column -->
+					<div class="flex flex-col w-1/5 p-4 bg-white rounded-lg shadow-lg" data-status="rejected" ondragover="allowDrop(event)" ondrop="drop(event)">
+						<h2 class="mb-4 text-lg font-semibold text-gray-700 border-b-2">Rejected</h2>
+						<div id="rejected" class="flex-1 space-y-4">
+							{% for jobOfferRefuse in jobOfferRefuses %}
+								<div class="p-4 bg-red-100 rounded-lg shadow" draggable="true" ondragstart="drag(event)" id="job1">{{jobOfferRefuse.title}}</div>
+
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+				// Allow dropping
+function allowDrop(ev) {
+ev.preventDefault();
+}
+
+// Drag the job item
+function drag(ev) {
+ev.dataTransfer.setData("text", ev.target.id);
+ev.target.classList.add("dragging");
+}
+
+// Drop the job item in a new column
+function drop(ev) {
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+var element = document.getElementById(data);
+ev.target.closest("div").appendChild(element);
+element.classList.remove("dragging");
+}
+			</script>
+		</body>
+	</html>
+
 
 {% endblock %}

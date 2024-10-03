@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class LinkedInMessageController extends AbstractController
 {
-    #[Route('/linkedin-message/g/generate', name: 'linked_in_message_generate', methods: ['POST'])]
+    #[Route('/linkedin-message/g/generate', name: 'linked_in_message_generate', methods: ['POST', 'GET'])]
     public function generate(): Response
     {
         return $this->render('linked_in_message/generate.html.twig');

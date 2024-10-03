@@ -10,10 +10,12 @@ use App\Repository\JobOfferRepository;
 use App\Repository\LinkedInMessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Config\Doctrine\Orm\EntityManagerConfig;
 
 #[IsGranted('ROLE_USER')]
 class JobOfferController extends AbstractController
@@ -100,5 +102,28 @@ class JobOfferController extends AbstractController
         return $this->render('job_offer/delete.html.twig', [
             'jobOffer' => $jobToDelete,
         ]);
+    }
+
+    #[Route('/updateJobStatus', name: 'app_update_job_status', methods: ['GET', 'POST'])]
+    public function update(string  $id, EntityManagerInterface $em, Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $jobId = $data['id'];
+        $newStatus = $data['status'];
+
+        // Find the job entity by its ID
+        $job = $em->getRepository(JobOffer::class)->find($jobId);
+
+        if (!$job) {
+            return new JsonResponse(['error' => 'Job not found'], 404);
+        }
+
+        // Update the job status
+        $job->setStatus($newStatus); // Adjust according to your entity method
+
+        // Persist changes to the database
+        $em->flush();
+
+        return new JsonResponse(['success' => true, 'message' => 'Job status updated successfully']);
     }
 }

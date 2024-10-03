@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Ask OpenAI</h1>
+	<form id="askForm">
+		<label for="prompt">Your Question:</label>
+		<input type="hidden" name="">
+		<textarea id="prompt" name="prompt" rows="4" required></textarea>
+		<button type="submit">Ask</button>
+	</form>
+
+	<h2>Response</h2>
+	<pre id="response"></pre>
+
+	<script>
+		document.getElementById('askForm').onsubmit = async (e) => {
+e.preventDefault();
+const prompt = document.getElementById('prompt').value;
+
+const response = await fetch('/generate-cover-letter', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({prompt})
+});
+
+const data = await response.json();
+console.log(data);
+document.getElementById('response').textContent = data.response;
+};
+	</script>
+{% endblock %}
