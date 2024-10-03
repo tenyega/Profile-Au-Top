@@ -1,0 +1,77 @@
+<div{{attributes}}>
+	<div class="max-w-screen-sm mx-auto my-5">
+		<input type="text" data-model="query"  placeholder="Search your Job here ... ">
+	</div>
+</div>
+{% set jobOffers = this.JobOffers %}
+{% if jobOffers | length == 0 %}
+	<h1 class='text-3xl font-bold text-center'>
+		Pas de Resultat
+	</h1>
+{% endif %}
+{% for jobOffer in jobOffers %}
+	<a href="{{path('app_job_offer_show', {'id':jobOffer.id})}}">
+		<div class="container py-8 mx-auto">
+			<div
+				class="max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
+				<!-- Job Offer Card -->
+				<div class="p-6">
+					<h1 class="text-2xl font-bold text-gray-900">{{ jobOffer.title }}</h1>
+					<p class="text-sm text-gray-600">Posted by
+						{{ jobOffer.company }}</p>
+
+					<div class="mt-4">
+						<p class="text-gray-700">
+							<span class="font-semibold">Location:</span>
+							{{ jobOffer.location }}</p>
+						<p class="text-gray-700">
+							<span class="font-semibold">Salary:</span>
+							{{ jobOffer.salary }}</p>
+						<p class="text-gray-700">
+							<span class="font-semibold">Contact Person:</span>
+							{{ jobOffer.contactPerson }}</p>
+						<p class="text-gray-700">
+							<span class="font-semibold">Contact Email:</span>
+							<a href="mailto:{{ jobOffer.contactEmail }}" class="text-blue-500 underline">{{ jobOffer.contactEmail }}</a>
+						</p>
+						<p class="text-gray-700">
+							<span class="font-semibold">Application Deadline:</span>
+							{{ jobOffer.applicationDate|date('Y-m-d') }}</p>
+
+						{% if jobOffer.status.label == "En attente" or jobOffer.status.label == "Refusé" or jobOffer.status.label == "Entretien" %}
+
+							<p class="text-gray-700">
+								<span class="font-semibold">Status:</span>
+								{% if jobOffer.status.label == "En attente" %}
+									On Hold
+								{% elseif jobOffer.status.label == "Entretien" %}
+									Interview
+
+								{% else %}
+									Refused
+								{% endif %}
+
+							</p>
+
+						{% else %}
+							<p class="text-gray-700">
+								<span class="font-semibold">Status:</span>
+								{{ jobOffer.status.label }}</p>
+
+							<div class="mt-6">
+								<a href="{{path('linked_in_message_generate') }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Generate Cover Letter</a>
+
+								<a href="{{ jobOffer.link }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
+							</div>
+
+
+						{% endif %}
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</a>
+{% endfor %}
