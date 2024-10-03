@@ -5,9 +5,11 @@
 
 {% block body %}
 	{% if jobOffers|length == 0  %}
-		<h1 class='text-2xl text-center'>
+		<h1 class="text-3xl font-bold text-center">
 			No Job Offers Saved!!!</h1>
 	{% endif %}
+	<h1 class="text-3xl font-bold text-center">
+		All the jobs Saved</h1>
 	{% for jobOffer in jobOffers %}
 		<a href="{{path('app_job_offer_show', {'id':jobOffer.id})}}">
 			<div class="container py-8 mx-auto">

@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
-
+	<h1 class="text-3xl font-bold text-center">
+		JOB DETAILS
+	</h1>
 	{# JOB OFFER DETAILS #}
 	<div class="container py-8 mx-auto">
 		<div
@@ -32,12 +34,15 @@
 					<p class="text-gray-700">
 						<span class="font-semibold">Application Deadline:</span>
 						{{ jobOffer.applicationDate|date('Y-m-d') }}</p>
-					{% if jobOffer.status.label == "En attente" or jobOffer.status.label == "Refusé" %}
+					{% if jobOffer.status.label == "En attente" or jobOffer.status.label == "Refusé" or jobOffer.status.label == "Entretien" %}
 
 						<p class="text-gray-700">
 							<span class="font-semibold">Status:</span>
 							{% if jobOffer.status.label == "En attente" %}
 								On Hold
+							{% elseif jobOffer.status.label == "Entretien" %}
+								Interview
+
 							{% else %}
 								Refused
 							{% endif %}

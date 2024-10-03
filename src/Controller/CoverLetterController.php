@@ -17,6 +17,15 @@ class CoverLetterController extends AbstractController
         return $this->render('cover_letter/generate.html.twig');
     }
 
+    #[Route('/cover-letter/all', name: 'app_cover_letter_all', methods: ['GET'])]
+    public function all(CoverLetterRepository $clr): Response
+    {
+        $coverLetters = $clr->findBy(['app_user' => $this->getUser()]);
+        return $this->render('cover_letter/all.html.twig', [
+            'coverLetters' => $coverLetters
+        ]);
+    }
+
     #[Route('/cover-letter/{id}', name: 'app_cover_letter_show', methods: ['GET'])]
     public function show(CoverLetterRepository $clr, string $id): Response
     {
