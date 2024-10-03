@@ -20,9 +20,9 @@ class LinkedInMessageController extends AbstractController
     #[Route('/linkedin-message/{id}', name: 'linked_in_message_show', methods: ['GET'])]
     public function show(LinkedInMessageRepository $lmr, string $id): Response
     {
-        $linkedInMessage = $lmr->findOneBy(['id' => $id]);
+        $linkedInMessages = $lmr->findBy(['app_user' => $id]);
         return $this->render('linked_in_message/show.html.twig', [
-            'linkedInMessage' => $linkedInMessage,
+            'linkedInMessages' => $linkedInMessages,
         ]);
     }
 }

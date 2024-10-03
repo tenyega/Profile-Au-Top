@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\JobOffer;
 use App\Enum\JobStatus;
 use App\Form\JobOfferType;
+use App\Repository\CoverLetterRepository;
 use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,11 +51,17 @@ class JobOfferController extends AbstractController
 
 
     #[Route('/job-offers/{id}', name: 'app_job_offer_show', methods: ['GET'])]
-    public function show(string  $id, JobOfferRepository $jr): Response
+    public function show(string  $id, JobOfferRepository $jr, CoverLetterRepository $clr): Response
     {
         $jobOffer = $jr->findOneBy(['id' => $id]);
+
+        $coverLetters = $clr->findBy([
+            'jobOffer' => $jobOffer,
+            'app_user' => $this->getUser()
+        ]);
         return $this->render('job_offer/show.html.twig', [
             'jobOffer' => $jobOffer,
+            'coverLetters' => $coverLetters
         ]);
     }
 
@@ -75,11 +82,11 @@ class JobOfferController extends AbstractController
         }
 
         return $this->render('job_offer/edit.html.twig', [
-            'jobOfferForm' => $form
+            'form' => $form
         ]);
     }
 
-    #[Route('/job-offers/{id}/delete', name: 'app_job_offer_delete', methods: ['POST'])]
+    #[Route('/job-offers/{id}/delete', name: 'app_job_offer_delete', methods: ['GET', 'POST'])]
     public function delete(string  $id, JobOfferRepository $jr): Response
     {
         $jobToDelete = $jr->findOneBy(['id' => $id]);

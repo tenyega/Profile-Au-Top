@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mx-auto py-8">
+
+
+	<div class="container py-8 mx-auto">
 		<div
-			class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+			class="max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
 			<!-- Job Offer Card -->
 			<div class="p-6">
 				<h1 class="text-2xl font-bold text-gray-900">{{ jobOffer.title }}</h1>
@@ -30,29 +32,73 @@
 					<p class="text-gray-700">
 						<span class="font-semibold">Application Deadline:</span>
 						{{ jobOffer.applicationDate|date('Y-m-d') }}</p>
-					{% if jobOffer.status.label == "En attente" %}
+					{% if jobOffer.status.label == "En attente" or jobOffer.status.label == "Refusé" %}
+
 						<p class="text-gray-700">
 							<span class="font-semibold">Status:</span>
-							On Hold
+							{% if jobOffer.status.label == "En attente" %}
+								On Hold
+							{% else %}
+								Refused
+							{% endif %}
+
 						</p>
 
 					{% else %}
 						<p class="text-gray-700">
 							<span class="font-semibold">Status:</span>
 							{{ jobOffer.status.label }}</p>
-						<div class="mt-6">
-							<a href="{{ jobOffer.link }}" target="_blank" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
-						</div>
+
 					{% endif %}
 
 				</div>
+				<div class="mt-6">
 
-				<a href="{{path('app_job_offer_edit', {'id':jobOffer.id})}}" target="_blank" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">Edit</a>
-				<a href="{{path('app_job_offer_delete', {'id':jobOffer.id})}}" target="_blank" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">Delete</a>
+					{% if jobOffer.status.label != "En attente" and jobOffer.status.label != "Refusé" %}
+						<a href="{{path('app_cover_letter') }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Generate</a>
 
+						<a href="{{ jobOffer.link }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
+					{% endif %}
+					<a href="{{path('app_job_offer_edit', {'id':jobOffer.id})}}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Edit</a>
+					<a href="{{path('app_job_offer_delete', {'id':jobOffer.id})}}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Delete</a>
+				</div>
 
 			</div>
 		</div>
 	</div>
+	{# COVER LETTER AFFICHAGE  #}
+
+
+	{% for coverLetter in coverLetters %}
+		<div
+			class="max-w-4xl p-6 mx-auto mb-8 bg-white rounded-lg shadow-lg">
+			<!-- Content Section -->
+			<div class="text-gray-800">
+				<p class="mb-4 text-lg">
+					{{coverLetter.content}}
+				</p>
+			</div>
+
+
+			<div class="flex items-center justify-between mt-2 text-sm text-gray-500">
+				<div>Created At:
+					<span class="text-gray-600">
+						{{coverLetter.createdAt|date('Y-m-d')}}
+					</span>
+				</div>
+				<div>Last updated At:
+					<span class="text-gray-600">
+						{{coverLetter.updatedAt|date('Y-m-d')}}
+					</span>
+				</div>
+
+			</div>
+			<div class="mt-6">
+				<a href="{{ path('app_cover_letter_delete', {'id':coverLetter.id} )}}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Delete</a>
+			</div>
+		</div>
+
+	{% endfor %}
+
 
 {% endblock %}

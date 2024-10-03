@@ -4,44 +4,18 @@
 {% endblock %}
 
 {% block body %}
-	{% for jobOffer in jobOffers %}
-		<div class="container mx-auto py-8">
-			<div
-				class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-				<!-- Job Offer Card -->
-				<div class="p-6">
-					<h1 class="text-2xl font-bold text-gray-900">{{ jobOffer.title }}</h1>
-					<p class="text-sm text-gray-600">Posted by
-						{{ jobOffer.company }}</p>
+	<body {{ stimulus_controller('symfony/ux-swup/swup', { containers: ['#swup'], animateHistoryBrowsing: true, animationSelector: '[class*="transition-"]', cache: true, linkSelector: '...', theme: 'slide', debug: true, } ) }}>
 
-					<div class="mt-4">
-						<p class="text-gray-700">
-							<span class="font-semibold">Location:</span>
-							{{ jobOffer.location }}</p>
-						<p class="text-gray-700">
-							<span class="font-semibold">Salary:</span>
-							{{ jobOffer.salary }}</p>
-						<p class="text-gray-700">
-							<span class="font-semibold">Contact Person:</span>
-							{{ jobOffer.contactPerson }}</p>
-						<p class="text-gray-700">
-							<span class="font-semibold">Contact Email:</span>
-							<a href="mailto:{{ jobOffer.contactEmail }}" class="text-blue-500 underline">{{ jobOffer.contactEmail }}</a>
-						</p>
-						<p class="text-gray-700">
-							<span class="font-semibold">Application Deadline:</span>
-							{{ jobOffer.applicationDate|date('Y-m-d') }}</p>
-						<p class="text-gray-700">
-							<span class="font-semibold">Status:</span>
-							{{ jobOffer.status.label }}</p>
-					</div>
-
-					<div class="mt-6">
-						<a href="{{ jobOffer.link }}" target="_blank" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
-					</div>
-				</div>
+		<div class="flex flex-col items-center min-h-screen overflow-hidden bg-white bg-gray-100 rounded-lg shadow-lg justify-evenly px-4max-w ">
+			<img src="{{ asset('img/logo.png') }}" alt="logo" width="150" class="transition-transform duration-200 ease-in-out rounded-full hover:scale-95">
+			<div class="flex flex-col w-1/2 mb-5 ">
+				<h1 class="text-4xl font-bold text-center text-gray-800">
+					PROJECT PROFIL AU TOP
+				</h1>
+				<p class="mt-4 text-center text-gray-600">
+					Elevate your profile to reflect the best version of yourself! Let your unique qualities shine through and make your presence felt. A well-crafted profile can highlight your individuality and showcase your passion, helping you stand out in a crowded space. It's not just about listing achievements; it's about telling your story and conveying who you are at your core. Your personality is your power—let your profile express it with vibrancy and authenticity. Unleash your true self and turn heads with a profile that captures your essence, giving it the spotlight it truly deserves!
+				</p>
 			</div>
 		</div>
-	{% endfor %}
-
+	</body>
 {% endblock %}

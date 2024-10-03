@@ -16,11 +16,12 @@
 				<a href="{{path('app_job_offer_new')}}" class="p-2 border-2 rounded-md border-neutral-700" title='Add new job'>
 					{{ ux_icon('mdi:home-add',{'class': 'h-6 w-6'}) }}
 				</a>
-
+				<a href="{{path('linked_in_message_show', {'id':app.user.id})}}" data-tooltip="Logout" class="p-2 border-2 rounded-md border-neutral-700" title='Linked In Messages'>
+					{{ ux_icon('mdi:message-processing-outline',{'class': 'h-6 w-6'}) }}
+				</a>
 				<a href="{{path('app_logout')}}" data-tooltip="Logout" class="p-2 border-2 rounded-md border-neutral-700" title='logout'>
 					{{ ux_icon('mdi:user',{'class': 'h-6 w-6'}) }}
 				</a>
-
 			{% else %}
 				<a href="{{path('app_login')}}" class="p-2 border-2 rounded-md border-neutral-700" title="Login">
 					{{ ux_icon('mdi:user',{'class': 'h-6 w-6'}) }}

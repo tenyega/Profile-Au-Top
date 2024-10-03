@@ -25,4 +25,13 @@ class CoverLetterController extends AbstractController
             'coverLetter' => $coverLetter
         ]);
     }
+
+    #[Route('/cover-letter/d/{id}', name: 'app_cover_letter_delete', methods: ['GET'])]
+    public function delete(CoverLetterRepository $clr, string $id): Response
+    {
+        $coverLetter = $clr->deleteCoverLetter(['id' => $id]);
+
+        $this->addFlash('success', 'The selected cover letter has been deleted');
+        return $this->redirectToRoute('app_home');
+    }
 }

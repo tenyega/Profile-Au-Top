@@ -1,7 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Your Job Details
+{% block title %}Create New Job Offer
 {% endblock %}
 
 {% block body %}
-	{{ form(jobOfferForm) }}{% endblock %}
+	<div class="container mx-auto py-8">
+		<div class="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6">
+			<h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Create New Job Offer</h1>
+
+			{{ form_start(form) }}
+
+			<!-- Title Field -->
+			<div class="mb-4">
+				{{ form_label(form.title, 'Job Title', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.title, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.title) }}
+			</div>
+
+			<!-- Company Field -->
+			<div class="mb-4">
+				{{ form_label(form.company, 'Company Name', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.company, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.company) }}
+			</div>
+
+			<!-- Link Field -->
+			<div class="mb-4">
+				{{ form_label(form.link, 'Application Link', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.link, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.link) }}
+			</div>
+
+			<!-- Location Field -->
+			<div class="mb-4">
+				{{ form_label(form.location, 'Location', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.location, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.location) }}
+			</div>
+
+			<!-- Salary Field -->
+			<div class="mb-4">
+				{{ form_label(form.salary, 'Salary', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.salary, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.salary) }}
+			</div>
+
+			<!-- Contact Person Field -->
+			<div class="mb-4">
+				{{ form_label(form.contactPerson, 'Contact Person', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.contactPerson, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.contactPerson) }}
+			</div>
+
+			<!-- Contact Email Field -->
+			<div class="mb-4">
+				{{ form_label(form.contactEmail, 'Contact Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.contactEmail, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.contactEmail) }}
+			</div>
+
+			<!-- Application Date Field -->
+			<div class="mb-4">
+				{{ form_label(form.applicationDate, 'Application Date', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.applicationDate, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.applicationDate) }}
+			</div>
+
+
+			<!-- Status Field (Enum) -->
+			<div class="mb-4">
+				{{ form_label(form.status, 'Job Status', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+				{{ form_widget(form.status, {'attr': {'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'}}) }}
+				{{ form_errors(form.status) }}
+			</div>
+
+			<!-- Submit Button -->
+			<div class="mt-6">
+				{{ form_widget(form.Submit, {'attr': {'class': 'w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500'}}) }}
+			</div>
+
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}
+	

@@ -89,7 +89,19 @@ CREATING LOGIN FORM AND REGISTRATION FORM
 		added is_verified
 
 INSTALLED UX ICON FROM SYMFONY 
-composer require symfony/asset-mapper symfony/stimulus-bundle
+	composer require symfony/ux-twig-component
+	composer require symfony/ux-icon
+
+
+KANBAN controller 
+	symfony console make:controller Kanban
+
+ApiJobOfferController
+	symfony console make:controller ApiJobOffer
+
+
+SWUP 
+	composer require symfony/ux-swup
 
 ADMIN
 	composer req easycorp/easyadmin-bundle
