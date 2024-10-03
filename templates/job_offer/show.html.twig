@@ -5,7 +5,7 @@
 
 {% block body %}
 
-
+	{# JOB OFFER DETAILS #}
 	<div class="container py-8 mx-auto">
 		<div
 			class="max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
@@ -67,8 +67,6 @@
 		</div>
 	</div>
 	{# COVER LETTER AFFICHAGE  #}
-
-
 	{% for coverLetter in coverLetters %}
 		<div
 			class="max-w-4xl p-6 mx-auto mb-8 bg-white rounded-lg shadow-lg">
@@ -100,5 +98,36 @@
 
 	{% endfor %}
 
+	{# LINKED IN MESSAGE DETAILS #}
+	{% for linkedInMessage in linkedInMessages %}
+		<div
+			class="max-w-4xl p-6 mx-auto mb-8 bg-white rounded-lg shadow-lg">
+			<!-- Content Section -->
+			<div class="text-gray-800">
+				<p class="mb-4 text-lg">
+					{{linkedInMessage.content}}
+				</p>
+			</div>
+
+
+			<div class="flex items-center justify-between mt-2 text-sm text-gray-500">
+				<div>Created At:
+					<span class="text-gray-600">
+						{{linkedInMessage.createdAt|date('Y-m-d')}}
+					</span>
+				</div>
+				<div>Last updated At:
+					<span class="text-gray-600">
+						{{linkedInMessage.updatedAt|date('Y-m-d')}}
+					</span>
+				</div>
+
+			</div>
+			<div class="mt-6">
+				<a href="{{ path('linked_in_message_delete', {'id':linkedInMessage.id} )}}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Delete</a>
+			</div>
+		</div>
+
+	{% endfor %}
 
 {% endblock %}

@@ -25,4 +25,14 @@ class LinkedInMessageController extends AbstractController
             'linkedInMessages' => $linkedInMessages,
         ]);
     }
+
+
+    #[Route('/linkedin-message/d/{id}', name: 'linked_in_message_delete', methods: ['GET'])]
+    public function delete(LinkedInMessageRepository $lmr, string $id): Response
+    {
+        $linkedInMessage = $lmr->deleteLinkedInMessage(['id' => $id]);
+        dd($linkedInMessage);
+        $this->addFlash('success', 'The selected cover letter has been deleted');
+        return $this->redirectToRoute('app_home');
+    }
 }

@@ -7,6 +7,7 @@ use App\Enum\JobStatus;
 use App\Form\JobOfferType;
 use App\Repository\CoverLetterRepository;
 use App\Repository\JobOfferRepository;
+use App\Repository\LinkedInMessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +52,7 @@ class JobOfferController extends AbstractController
 
 
     #[Route('/job-offers/{id}', name: 'app_job_offer_show', methods: ['GET'])]
-    public function show(string  $id, JobOfferRepository $jr, CoverLetterRepository $clr): Response
+    public function show(string  $id, JobOfferRepository $jr, CoverLetterRepository $clr, LinkedInMessageRepository $lmr): Response
     {
         $jobOffer = $jr->findOneBy(['id' => $id]);
 
@@ -59,9 +60,15 @@ class JobOfferController extends AbstractController
             'jobOffer' => $jobOffer,
             'app_user' => $this->getUser()
         ]);
+
+        $linkedInMessages = $lmr->findBy([
+            'jobOffer' => $jobOffer,
+            'app_user' => $this->getUser()
+        ]);
         return $this->render('job_offer/show.html.twig', [
             'jobOffer' => $jobOffer,
-            'coverLetters' => $coverLetters
+            'coverLetters' => $coverLetters,
+            'linkedInMessages' => $linkedInMessages
         ]);
     }
 
