@@ -103,6 +103,12 @@ ApiJobOfferController
 SWUP 
 	composer require symfony/ux-swup
 
+LIVE COMPONENT FOR A JOB OFFER SEARCH ================================== NOT WORKING FOR SEARCH
+	composer require symfony/ux-live-component
+	Symfony console make:twig-component
+
+	composer require symfony/security-bundle
+
 ADMIN
 	composer req easycorp/easyadmin-bundle
 	symfony console make:admin:dashboard	
@@ -115,8 +121,7 @@ PAGINATION (knp paginator bundle)
 	copy from vendor\knplabs\knp-pagination-bundle\templates\pagination\tailwindcss to template\components\pagination.html.twig
 	created paginator.yaml with contents already given and change    << pagination: "components/pagination.html.twig">>
 
+AI
 
+KANBAN
 
-ADMIN
-	 composer req easycorp/easyadmin-bundle
-	symfony console make:admin:dashboard

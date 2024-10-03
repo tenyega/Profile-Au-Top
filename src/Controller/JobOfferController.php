@@ -18,7 +18,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class JobOfferController extends AbstractController
 {
-    #[Route('/job-offers', name: 'app_job_offer', methods: ['GET', 'POST'])]
+    #[Route('/job-offers', name: 'app_job_offer', methods: ['GET'])]
     public function list(JobOfferRepository $jr): Response
     {
         $user = $this->getUser();

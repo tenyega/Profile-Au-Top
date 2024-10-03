@@ -1,0 +1,21 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+{% block main %}
+
+	<body class="flex min-h-screen bg-gray-100">
+		<div class="flex w-full md:flex-row">
+			<div class="flex-1 p-4 p-6 m-4 bg-white rounded-lg shadow-lg">
+				<h1 class="mb-4 text-3xl font-bold">
+					{{ 'WELCOME TO SYMFONY PROJECT DASHBOARD' | trans }}
+				</h1>
+				<div class="flex flex-row items-center justify-between">
+					<img src="{{ asset('img/logo.png') }}" alt="logo" class="object-contain mb-4 rounded-md h-60 w-60">
+					<p class="ml-4 text-2xl text-gray-700">
+						Elevate your profile to reflect the best version of yourself! Let your unique qualities shine through and make your presence felt. A well-crafted profile can highlight your individuality and showcase your passion, helping you stand out in a crowded space. It's not just about listing achievements; it's about telling your story and conveying who you are at your core. Your personality is your power—let your profile express it with vibrancy and authenticity. Unleash your true self and turn heads with a profile that captures your essence, giving it the spotlight it truly deserves!
+					</p>
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+{% endblock %}

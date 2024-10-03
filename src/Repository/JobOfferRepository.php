@@ -32,13 +32,13 @@ class JobOfferRepository extends ServiceEntityRepository
     //    }
     public function findByQuery(string $query, $user): array
     {
-        return $this->createQueryBuilder('j')
+        $result = $this->createQueryBuilder('j')
             ->where('j.title LIKE :query')
-            ->andWhere('j.app_user = :user')
             ->setParameter('query', '%' . $query . '%')
+            ->andWhere('j.app_user = :user')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
+        return $result;
     }
-    
 }
