@@ -44,7 +44,7 @@ class JobOfferController extends AbstractController
             $em->persist($jobOffer);
             $em->flush();
             $this->addFlash('success', 'Your note has been created successfully'); // added a flash with this method but this needs to be shown to the user inside the twig file  also . 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_job_offer_show', ['id' => $jobOffer->getID()]);
         }
         return $this->render('job_offer/new.html.twig', [
             'form' => $form
