@@ -60,7 +60,7 @@
 				<div class="mt-6">
 
 					{% if jobOffer.status.label != "En attente" and jobOffer.status.label != "Refusé" %}
-						<a href="{{path('app_cover_letter') }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Generate</a>
+						<a href="{{path('app_cover_letter_generate') }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Generate</a>
 
 						<a href="{{ jobOffer.link }}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Apply Now</a>
 					{% endif %}

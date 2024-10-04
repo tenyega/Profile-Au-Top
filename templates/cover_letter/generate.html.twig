@@ -2,7 +2,29 @@
 
 {% block title %}Cover Letters
 {% endblock %}
-{% block body %}HERE THE MESSAGES ARE GENERATED USING API
+{% block body %}
 
-	{{ dump(generatedCoverLetter) }}
+
+	<h1 class="text-3xl font-bold text-center">
+		COVER LETTER
+	</h1>
+	<div
+		class="container p-6 mx-auto">
+		<!-- Card Container -->
+		<div
+			class="max-w-3xl p-6 mx-auto bg-white rounded-lg shadow-md">
+			<!-- Content Section -->
+			<div class="mb-6">
+				<h2 class="text-lg font-semibold text-gray-900">Content:</h2>
+				<p class="mt-2 text-gray-700">
+					{{ coverLetter.response|raw }}
+				</p>
+			</div>
+			<a href="{{path('app_home')}}" class="inline-block px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600">Add</a>
+
+
+		</div>
+
+	</div>
+
 {% endblock %}
