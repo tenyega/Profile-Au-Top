@@ -11,7 +11,7 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<meta name="csrf-token" content="{{ csrf_token('drop') }}">
 
-			<title>Kanban Board with Drag and Drop</title>
+			<title>Kanban Board For your Job Offers</title>
 			<script src="https://cdn.tailwindcss.com"></script>
 			<style>
 				.dragging {
@@ -110,76 +110,70 @@ ev.dataTransfer.setData("text", ev.target.id); // Store the ID of the dragged it
 ev.target.classList.add("dragging"); // Add a class for visual indication (optional)
 }
 
-function drop(ev) {
-    // Prevent default behavior
-    ev.preventDefault();
-    
-    var data = ev.dataTransfer.getData("text"); // Get the ID of the dragged item
-    var element = document.getElementById(data); // Get the dragged element
-    console.log('Dropped element:', element);
+function drop(ev) { // Prevent default behavior
+ev.preventDefault();
 
-    // Find the target container to drop the element
-    var targetContainer = ev.target.closest("div[data-status]"); // Ensure we find a div with data-status
+var data = ev.dataTransfer.getData("text"); // Get the ID of the dragged item
+var element = document.getElementById(data); // Get the dragged element
+console.log('Dropped element:', element);
 
-    if (!targetContainer) {
-        console.error('No valid target container found');
-        return; // Exit if targetContainer is not defined
-    }
+// Find the target container to drop the element
+var targetContainer = ev.target.closest("div[data-status]"); // Ensure we find a div with data-status
 
-    // Append the dragged element to the target container
-    targetContainer.appendChild(element);
-    element.classList.remove("dragging"); // Remove dragging class
+if (! targetContainer) {
+console.error('No valid target container found');
+return; // Exit if targetContainer is not defined
+}
 
-    // Change the color of the dropped element based on the target container's status
-    switch (targetContainer.dataset.status) {
-        case "A postuler":
-            element.className = "p-4 bg-blue-100 rounded-lg shadow"; // Blue color
-            break;
-        case "En attente":
-            element.className = "p-4 bg-yellow-100 rounded-lg shadow"; // Yellow color
-            break;
-        case "Entretien":
-            element.className = "p-4 bg-orange-100 rounded-lg shadow"; // Orange color
-            break;
-        case "Accepté":
-            element.className = "p-4 bg-green-100 rounded-lg shadow"; // Green color
-            break;
-        case "Refusé":
-            element.className = "p-4 bg-red-100 rounded-lg shadow"; // Red color
-            break;
-        default:
-            element.className = "p-4 bg-gray-100 rounded-lg shadow"; // Default color
-    }
+// Append the dragged element to the target container
+targetContainer.appendChild(element);
+element.classList.remove("dragging");
+// Remove dragging class
 
-    console.log('TargetContainer', targetContainer);
-    // Log the target container for debugging
+// Change the color of the dropped element based on the target container's status
+switch (targetContainer.dataset.status) {
+case "A postuler": element.className = "p-4 bg-blue-100 rounded-lg shadow"; // Blue color
+break;
+case "En attente": element.className = "p-4 bg-yellow-100 rounded-lg shadow"; // Yellow color
+break;
+case "Entretien": element.className = "p-4 bg-orange-100 rounded-lg shadow"; // Orange color
+break;
+case "Accepté": element.className = "p-4 bg-green-100 rounded-lg shadow"; // Green color
+break;
+case "Refusé": element.className = "p-4 bg-red-100 rounded-lg shadow"; // Red color
+break;
+default: element.className = "p-4 bg-gray-100 rounded-lg shadow"; // Default color
+}
 
-    // Prepare data to be sent to the server
-    const payload = {
-        id: data, // ID of the dragged item
-        status: targetContainer.dataset.status // Get the status from the target container
-    };
-    const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+console.log('TargetContainer', targetContainer);
+// Log the target container for debugging
 
-    fetch('/api/job-offers/update-status', { // Change this URL to your Symfony route
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken // Use the retrieved CSRF token
-        },
-        body: JSON.stringify(payload)
-    }).then(response => response.json()).then(data => {
-        console.log('Success:', data);
-        // Handle success (e.g., update UI, notify user)
-    }).catch((error) => {
-        console.error('Error:', error);
-        // Handle error (e.g., notify user)
-    });
+// Prepare data to be sent to the server
+const payload = {
+id: data, // ID of the dragged item
+status: targetContainer.dataset.status // Get the status from the target container
+};
+const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+
+fetch('/api/job-offers/update-status', { // Change this URL to your Symfony route
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-CSRF-Token': csrfToken // Use the retrieved CSRF token
+},
+body: JSON.stringify(payload)
+}).then(response => response.json()).then(data => {
+console.log('Success:', data);
+// Handle success (e.g., update UI, notify user)
+}).catch((error) => {
+console.error('Error:', error);
+// Handle error (e.g., notify user)
+});
 }
 
 // Make the AJAX request to the Symfony backend
 			</script>
 		</body>
 	</html>
-</body></body></html>{% endblock %}
+{% endblock %}

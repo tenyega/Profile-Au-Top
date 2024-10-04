@@ -79,7 +79,7 @@ LOADED THE FIXTURES
 	symfony console d:f:l
 
 
-CREATING LOGIN FORM AND REGISTRATION FORM
+CREATING SECURITY CONTROLLER AND REGISTRATION FORM
 	symfony console make:security:form-login 
 		SecurityController with /logout and no phpUnit test
 	symfony console make:registration-form
