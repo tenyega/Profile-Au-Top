@@ -5,22 +5,70 @@
 
 {% block body %}
 	{% for flash_error in app.flashes('verify_email_error') %}
-		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		<div class="p-4 text-white bg-red-500 rounded-md alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<h1>Register</h1>
+	<div class="flex items-center justify-center min-h-screen bg-gray-100">
+		<div class="w-full max-w-sm p-8 bg-white rounded-lg shadow-md">
+			<h1 class="w-4/5 mb-2 text-3xl font-semibold text-center">Register</h1>
 
-	{{ form_errors(registrationForm) }}
+			<div
+				class="flex justify-center">
+				<!-- Flex container to center the form horizontally -->
+				<div
+					class="w-3/4 max-w-screen-md mx-auto space-y-6">
+					<!-- Form container with 75% width and increased max width -->
+					{{ form_errors(registrationForm) }}
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.firstName) }}
-	{{ form_row(registrationForm.lastName) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-	{{ form_row(registrationForm.agreeTerms) }}
+					{{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
 
-	<button type="submit" class="btn">Register</button>
-	{{ form_end(registrationForm) }}
+					<div>
+						{{ form_row(registrationForm.firstName, {
+                    'attr': {'class': 'block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'},
+                    'label_attr': {'class': 'block text-sm font-medium text-gray-700'}
+                }) }}
+					</div>
+
+					<div>
+						{{ form_row(registrationForm.lastName, {
+                    'attr': {'class': 'block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'},
+                    'label_attr': {'class': 'block text-sm font-medium text-gray-700'}
+                }) }}
+					</div>
+
+					<div>
+						{{ form_row(registrationForm.email, {
+                    'attr': {'class': 'block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'},
+                    'label_attr': {'class': 'block text-sm font-medium text-gray-700'}
+                }) }}
+					</div>
+
+					<div>
+						{{ form_row(registrationForm.plainPassword, {
+                    'attr': {'class': 'block w-full p-3 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500'},
+                    'label': 'Password',
+                    'label_attr': {'class': 'block text-sm font-medium text-gray-700'}
+                }) }}
+					</div>
+
+					<div class="flex items-start">
+						<div class="flex items-center h-5">
+							{{ form_row(registrationForm.agreeTerms, {
+                        'attr': {'class': 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'},
+                        'label_attr': {'class': 'ml-2 block text-sm text-gray-900'}
+                    }) }}
+						</div>
+					</div>
+
+					<div>
+						<button type="submit" class="flex justify-center w-full px-4 py-3 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+							Register
+						</button>
+					</div>
+
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
