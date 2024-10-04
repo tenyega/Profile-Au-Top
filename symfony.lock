@@ -47,15 +47,6 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
-    "openai-php/symfony": {
-        "version": "0.10",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.3",
-            "ref": "23b35dfd25adb2c5c467a50239a9ef0aa16f9328"
-        }
-    },
     "php-http/discovery": {
         "version": "1.20",
         "recipe": {

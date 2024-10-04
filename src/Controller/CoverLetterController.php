@@ -8,13 +8,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+
 #[IsGranted('ROLE_USER')]
 class CoverLetterController extends AbstractController
 {
-    #[Route('/cover-letter/g/generate', name: 'app_cover_letter', methods: ['POST'])]
-    public function generate(): Response
+
+
+
+    #[Route('/cover-letter/g/generate', name: 'app_cover_letter', methods: ['POST', 'GET'])]
+    public function generate(string $symbol): Response
     {
-        return $this->render('cover_letter/generate.html.twig');
+
+
+        return $this->render('cover_letter/generate.html.twig', [
+            'generatedCoverLetter' => ''
+        ]);
     }
 
     #[Route('/cover-letter/all', name: 'app_cover_letter_all', methods: ['GET'])]

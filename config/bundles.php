@@ -21,5 +21,5 @@ return [
     Symfony\UX\Swup\SwupBundle::class => ['all' => true],
     Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
-    OpenAI\Symfony\OpenAIBundle::class => ['all' => true],
+    Gemini\Symfony\GeminiBundle::class => ['all' => true],
 ];

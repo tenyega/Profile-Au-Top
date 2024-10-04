@@ -115,6 +115,12 @@ ADMIN
 	symfony console make:admin:crud 
 
 
+
+API
+
+composer require google-gemini-php/symfony
+
+
 PAGINATION (knp paginator bundle) 
 	composer require knplabs/knp-paginator-bundle
 	

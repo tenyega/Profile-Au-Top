@@ -162,7 +162,7 @@ function drop(ev) {
     const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
     const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
 
-    fetch('/update-status', { // Change this URL to your Symfony route
+    fetch('/api/job-offers/update-status', { // Change this URL to your Symfony route
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
